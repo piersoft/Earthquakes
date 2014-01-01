@@ -9,4 +9,8 @@ Per velocità di esecuzione ho inserito anche leaflet.geocsv-src.js ma si potreb
 
 La licenza del pluging CSV di Leaflet segue quella del rispettivo ideatore.
 
-La licenza del progetto è AGPL3.0
+
+ATTENZIONE AI TERMINI D'USO DELL'INGV:
+
+i Dati sono concessi solo per uso personale e non-commerciale.
+L’utente non è autorizzato a modificare, copiare, distribuire, trasmettere, mostrare, riprodurre, pubblicare, creare prodotti derivati da, trasferire o vendere alcuna informazione, prodotto o servizio ottenuto dai Dati senza un esplicito permesso concesso all’utente dall’INGV. 
