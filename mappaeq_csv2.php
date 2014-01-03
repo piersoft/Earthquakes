@@ -69,6 +69,12 @@ $output2 = passthru("sed -e 's/$search2/$replace2/g' $fileok > $fileok");
 			left:50px;
 			z-index: 2;
 		}
+		#botonera1 {
+			position:fixed;
+			top:40px;
+			left:50px;
+			z-index: 2;
+		}
 
 		#cargando {
 			position:fixed;
@@ -91,7 +97,7 @@ $output2 = passthru("sed -e 's/$search2/$replace2/g' $fileok > $fileok");
 			background: -moz-linear-gradient(top, #3e779d, #65a9d7);
 			background: -ms-linear-gradient(top, #3e779d, #65a9d7);
 			background: -o-linear-gradient(top, #3e779d, #65a9d7);
-			padding: 12px 24px;
+			padding: 3px 3px;
 			-webkit-border-radius: 10px;
 			-moz-border-radius: 10px;
 			border-radius: 10px;
@@ -114,6 +120,38 @@ $output2 = passthru("sed -e 's/$search2/$replace2/g' $fileok > $fileok");
 			border-top-color: #1b435e;
 			background: #1b435e;
 		}
+.boton1 {
+			border: 1px solid #96d1f8;
+			background: #65a9d7;
+			background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+			background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+			background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+			background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+			background: -o-linear-gradient(top, #3e779d, #65a9d7);
+			padding: 3px 3px;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			-webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+			-moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+			box-shadow: rgba(0,0,0,1) 0 1px 0;
+			text-shadow: rgba(0,0,0,.4) 0 1px 0;
+			color: white;
+			font-size: 13px;
+			/*font-family: Helvetica, Arial, Sans-Serif;*/
+			text-decoration: none;
+			vertical-align: middle;
+		}
+		.boton1:hover {
+			border-top-color: #28597a;
+			background: #28597a;
+			color: #ccc;
+		}
+		.boton1:active {
+			border-top-color: #1b435e;
+			background: #1b435e;
+		}
+
 #infodiv{
        position:fixed;
         left:2px;
@@ -141,6 +179,9 @@ $output2 = passthru("sed -e 's/$search2/$replace2/g' $fileok > $fileok");
 
 <div id="botonera">
 <button onClick="reply_click(this.id)" class="boton" id="localizame" >Magnitudo >=5 (click twice) </button>
+		</div>
+<div id="botonera1">
+<button onClick="reply_click1(this.id)" class="boton1" id="localizame" >Magnitudo >=3 (click twice) </button>
 		</div>
 
 <script>
@@ -171,6 +212,7 @@ layerControl.addTo(mapa);
 var customicon = 'pingrigio.png';
 
 var button= "YES";
+var button1= "YES";
 
 var bankias = L.geoCsv(null, {
 	onEachFeature: function (feature, layer) {
@@ -197,6 +239,60 @@ popup1 =popup+'<a href="http://cnt.rm.ingv.it/data_id/'+feature.properties.code+
 		}
 		layer.bindPopup(popup1);
 	},
+
+	pointToLayer: function (feature, latlng) {
+if (feature.properties.magnitude >=2){ customicon='pingiallo.png'};
+if (feature.properties.magnitude >=3){ customicon='pinarancio.png'};
+if (feature.properties.magnitude >=4){ customicon='pinarancioforte.png'};
+
+if (feature.properties.magnitude >=5 ){ customicon='pinrossoe.png'};
+		return L.marker(latlng, {
+			icon:L.icon({
+				iconUrl: customicon,
+				shadowUrl: 'marker-shadow.png',
+				iconSize: [20,20],
+				shadowSize:   [30, 30],
+				shadowAnchor: [10, 18]
+			})
+		});
+	},
+	firstLineTitles: true
+});
+
+var bankias3 = L.geoCsv(null, {
+	onEachFeature: function (feature, layer) {
+		var popup = '';
+		var popup1 = '';
+    
+var link='Link valid only for the last 30 days';
+
+
+
+
+		for (var clave in feature.properties) {
+
+
+
+
+
+
+			var title = bankias.getPropertyTitle(clave);
+			popup += '<b>'+title+'</b><br />'+feature.properties[clave]+'<br /><br />';
+popup1 =popup+'<a href="http://cnt.rm.ingv.it/data_id/'+feature.properties.code+'/event.html">'+link+'</a>';
+
+
+		}
+		layer.bindPopup(popup1);
+	}, 
+filter: function(feature, layer) {
+
+if (feature.properties.magnitude >= 3) {
+					
+return true;
+				}
+	return false;
+
+    },
 
 	pointToLayer: function (feature, latlng) {
 if (feature.properties.magnitude >=2){ customicon='pingiallo.png'};
@@ -271,9 +367,11 @@ if (feature.properties.magnitude >=5 ){ customicon='pinrossoe.png'};
 	firstLineTitles: true
 });
 
+
  var cluster='';
 
  var cluster1='';
+ var cluster2='';
 
 
 $.ajax ({
@@ -322,10 +420,10 @@ $.ajax ({
    complete: function() {
 
 mapa.removeLayer(cluster);
-
+mapa.removeLayer(cluster2);
 
 button="NO";
-
+$('#botonera').delay(100).fadeOut('slow');
       $('#cargando').delay(100).fadeOut('slow');
 
    }
@@ -336,6 +434,50 @@ map.addLayer(bankias2);
 
 }
 }
+
+
+function reply_click1(clicked_id)
+{
+
+if (button1 == "YES"){
+
+
+   // alert(clicked_id);
+
+$.ajax ({
+	type:'GET',
+	dataType:'text',
+	url:'elenco-eq1.csv',
+   error: function() {
+     alert('Unable to load data');
+   },
+     success: function(csv) {
+          cluster2 = new L.MarkerClusterGroup();
+		bankias3.addData(csv);
+		cluster2.addLayer(bankias3);
+		mapa.addLayer(cluster2);
+		mapa.fitBounds(cluster2.getBounds());
+
+	},
+   complete: function() {
+
+mapa.removeLayer(cluster);
+mapa.removeLayer(cluster1);
+
+
+button1="NO";
+$('#botonera1').delay(100).fadeOut('slow');
+      $('#cargando').delay(100).fadeOut('slow');
+
+   }
+});
+
+
+map.addLayer(bankias3);
+
+}
+}
+
 
 
 
