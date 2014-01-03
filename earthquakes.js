@@ -13,12 +13,12 @@ var eqfeed_callback = function (data) {
 
 	// Color scale - white to orange to red using a PiecewiseFunction
 	// NOTE:  Uncomment these lines to see the difference
-	/*
+	
 	var magnitudeColorFunction = new L.PiecewiseFunction([
 		new L.HSLLuminosityFunction(new L.Point(0,0.8), new L.Point(4,0.3), {outputSaturation: '100%', outputHue: 30}),
 		new L.HSLHueFunction(new L.Point(4,30), new L.Point(10,0), {outputLuminosity: '30%'})
 	]);
-		
+	/*	
 	var magnitudeFillColorFunction = new L.PiecewiseFunction([
 		new L.HSLLuminosityFunction(new L.Point(0,1), new L.Point(4,0.5), {outputSaturation: '100%', outputHue: 30}),
 		new L.HSLHueFunction(new L.Point(4,30), new L.Point(10,0))
@@ -59,14 +59,16 @@ var eqfeed_callback = function (data) {
 				displayName: 'Time (UTC)',
 				opacity: timeOpacityFunction,
 				fillOpacity: timeOpacityFunction,
-				//displayText: function (value) {
-					
+				displayText: function (value) {
+				return(value);
+		//return moment.unix(value/1000).format('DD/MM/YY HH:mm');
+
 					//return moment.unix(value/1000).format('MM/DD/YY HH:mm');
-				//}
+				}
 			}
 		},
 		layerOptions: {
-			numberOfSides: 4,
+			numberOfSides: 20,
 			radius: 10,
 			weight: 1,
 			color: '#000',
@@ -79,8 +81,8 @@ var eqfeed_callback = function (data) {
 			}
 		},
 		tooltipOptions: {
-			iconSize: new L.Point(90,76),
-			iconAnchor: new L.Point(-4,76)
+			iconSize: new L.Point(90,90),
+			iconAnchor: new L.Point(-4,90)
 		},
 		onEachRecord: function (layer, record, location) {
 			var $html = L.HTMLUtils.buildTable(record);
