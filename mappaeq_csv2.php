@@ -3,6 +3,8 @@
 $url = 'http://openmap.rm.ingv.it/gmaps/rec/files/last90days_events.csv';
 $file = "elenco-eq.csv";
 $fileok = "elenco-eq1.csv";
+$fileok1 = "elenco-eq2.csv";
+$fileok2 = "elenco-eq3.csv";
 
 $src = fopen($url, 'r');
 
@@ -10,20 +12,20 @@ $dest = fopen($file, 'w');
 stream_copy_to_stream($src, $dest);
 
 
-$search="LAT";
+$search="Lat";
 $replace="lat";
 
 $output = passthru("sed -e 's/$search/$replace/g' $file > $fileok");
 
-$search1="LON";
+$search1="Lon";
 $replace1="lng";
 
-$output1 = passthru("sed -e 's/$search1/$replace1/g' $fileok > $fileok");
+$output1 = passthru("sed -e 's/$search1/$replace1/g' $fileok > $fileok1");
 
 $search2=",";
 $replace2=";";
 
-$output2 = passthru("sed -e 's/$search2/$replace2/g' $fileok > $fileok");
+$output2 = passthru("sed -e 's/$search2/$replace2/g' $fileok1 > $fileok2");
 
 //echo stream_copy_to_stream($src, $dest) . "";
 
@@ -377,7 +379,7 @@ if (feature.properties.magnitude >=5 ){ customicon='pinrossoe.png'};
 $.ajax ({
 	type:'GET',
 	dataType:'text',
-	url:'elenco-eq1.csv',
+	url:'elenco-eq3.csv',
    error: function() {
      alert('Non riesco a caricare i dati');
    },
@@ -405,7 +407,7 @@ if (button == "YES"){
 $.ajax ({
 	type:'GET',
 	dataType:'text',
-	url:'elenco-eq1.csv',
+	url:'elenco-eq3.csv',
    error: function() {
      alert('Unable to load data');
    },
@@ -447,7 +449,7 @@ if (button1 == "YES"){
 $.ajax ({
 	type:'GET',
 	dataType:'text',
-	url:'elenco-eq1.csv',
+	url:'elenco-eq3.csv',
    error: function() {
      alert('Unable to load data');
    },
