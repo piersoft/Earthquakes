@@ -373,7 +373,7 @@ if (feature.properties.magnitude >=5 ){ classs='circlered'};
 			className : classs,
                       iconSize : [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
 html: '<div style="display: table; height:'+20*feature.properties.magnitude/3+'px; overflow: hidden; "><div align="center" style="display: table-cell; vertical-align: middle;"><div style="width:'+20*feature.properties.magnitude/3+'px;"><font color="white">'+feature.properties.magnitude+'</font></div></div></div>'}),
-                      title: '<div>'+feature.properties.magnitude+'</div>'});
+                      title: feature.properties.magnitude});
 
 
 
@@ -429,7 +429,7 @@ if (feature.properties.magnitude >=5 ){ classs='circlered'};
 			className : classs,
                       iconSize : [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
 html: '<div style="display: table; height:'+20*feature.properties.magnitude/3+'px; overflow: hidden; "><div align="center" style="display: table-cell; vertical-align: middle;"><div style="width:'+20*feature.properties.magnitude/3+'px;"><font color="white">'+feature.properties.magnitude+'</font></div></div></div>'}),
-                      title: '<div>'+feature.properties.magnitude+'</div>'});
+                      title: feature.properties.magnitude});
 
         
 
@@ -486,7 +486,7 @@ if (feature.properties.magnitude >=5 ){ classs='circlered'};
 			className : classs,
                       iconSize : [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
 html: '<div style="display: table; height:'+20*feature.properties.magnitude/3+'px; overflow: hidden; "><div align="center" style="display: table-cell; vertical-align: middle;"><div style="width:'+20*feature.properties.magnitude/3+'px;"><font color="white">'+feature.properties.magnitude+'</font></div></div></div>'}),
-                      title: '<div>'+feature.properties.magnitude+'</div>'});
+                      title: feature.properties.magnitude});
 
 
 
