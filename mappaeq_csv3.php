@@ -123,10 +123,10 @@ $XMLFile = fopen($file, "w") or die("can't open file");
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Map complex</a>
+          <a class="brand" href="mappaeq_csv2.php">Map simple</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="mappaeq_csv2.php">Map simple</a></li>
+              <li class="active"><a href="#"></a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
