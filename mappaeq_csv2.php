@@ -168,6 +168,124 @@ $output2 = passthru("sed -e 's/$search2/$replace2/g' $fileok1 > $fileok2");
         padding:5px;
         box-shadow: 0 3px 14px rgba(0,0,0,0.4)
 }
+div.textclass {
+           
+           position: absolute;
+            left: 15px;
+            top: 15px;
+            width: 150px;
+            height: 309px;
+            vertical-align: middle;
+            text-align: center;
+            font-family: Georgia, "Times New Roman", Times, serif;
+            font-style: italic;
+            padding: 1em 0 1em 0;           
+}
+div.circlered {
+	/* IE10 */
+background-image: -ms-linear-gradient(top right, red 0%, black 100%);
+ 
+/* Mozilla Firefox */
+background-image: -moz-linear-gradient(top right, red 0%, black 100%);
+ 
+/* Opera */
+background-image: -o-linear-gradient(top right, red 0%, black 100%);
+ 
+/* Webkit (Safari/Chrome 10) */
+background-image: -webkit-gradient(linear, right top, left bottom, color-stop(0, red), color-stop(1,black));
+ 
+/* Webkit (Chrome 11+) */
+background-image: -webkit-linear-gradient(top right, red 0%, black 100%);
+ 
+/* Regola standard */
+background-image: linear-gradient(top right, red 0%, black 100%);
+    background-color: red;
+    border-color: black;
+    border-radius: 50px;
+    border-style: solid;
+    border-width: 1px;
+	font-color: white;
+    width:5px;
+    height:5px;
+}
+div.circleorange {
+	/* IE10 */
+background-image: -ms-linear-gradient(top right, orange 0%, black 100%);
+ 
+/* Mozilla Firefox */
+background-image: -moz-linear-gradient(top right, orange 0%, black 100%);
+ 
+/* Opera */
+background-image: -o-linear-gradient(top right, orange 0%, black 100%);
+ 
+/* Webkit (Safari/Chrome 10) */
+background-image: -webkit-gradient(linear, right top, left bottom, color-stop(0, orange), color-stop(1, black));
+ 
+/* Webkit (Chrome 11+) */
+background-image: -webkit-linear-gradient(top right, orange 0%, black 100%);
+ 
+/* Regola standard */
+background-image: linear-gradient(top right, orange 0%, black 100%);
+    background-color: orange;
+    border-color: black;
+    border-radius: 50px;
+    border-style: solid;
+    border-width: 1px;
+    width:5px;
+    height:5px;
+}
+div.circleyellow {
+	/* IE10 */
+background-image: -ms-linear-gradient(top right, yellow 0%, black 100%);
+ 
+/* Mozilla Firefox */
+background-image: -moz-linear-gradient(top right, yellow 0%, black 100%);
+ 
+/* Opera */
+background-image: -o-linear-gradient(top right,yellow 0%, black 100%);
+ 
+/* Webkit (Safari/Chrome 10) */
+background-image: -webkit-gradient(linear, right top, left bottom, color-stop(0, yellow), color-stop(1, black));
+ 
+/* Webkit (Chrome 11+) */
+background-image: -webkit-linear-gradient(top right, yellow 0%, black 100%);
+ 
+/* Regola standard */
+background-image: linear-gradient(top right, yellow 0%, black 100%);
+    background-color: yellow;
+    border-color: black;
+    border-radius: 50px;
+    border-style: solid;
+    border-width: 1px;
+    width:5px;
+    height:5px;
+}
+div.circlewhite {
+		/* IE10 */
+background-image: -ms-linear-gradient(top right, white 0%, black 100%);
+ 
+/* Mozilla Firefox */
+background-image: -moz-linear-gradient(top right, white 0%, black 100%);
+ 
+/* Opera */
+background-image: -o-linear-gradient(top right, white 0%, black 100%);
+ 
+/* Webkit (Safari/Chrome 10) */
+background-image: -webkit-gradient(linear, right top, left bottom, color-stop(0, white), color-stop(1, black));
+ 
+/* Webkit (Chrome 11+) */
+background-image: -webkit-linear-gradient(top right, white 0%, black 100%);
+ 
+/* Regola standard */
+background-image: linear-gradient(top right, white 0%, black 100%);
+    background-color: white;
+    border-color: black;
+    border-radius: 50px;
+    border-style: solid;
+    border-width: 1px;
+    width:5px;
+    height:5px;
+}
 		</style>
 	</head>
 	<body>
@@ -243,20 +361,22 @@ popup1 =popup+'<a href="http://cnt.rm.ingv.it/data_id/'+feature.properties.code+
 	},
 
 	pointToLayer: function (feature, latlng) {
-if (feature.properties.magnitude >=2){ customicon='pingiallo.png'};
-if (feature.properties.magnitude >=3){ customicon='pinarancio.png'};
-if (feature.properties.magnitude >=4){ customicon='pinarancioforte.png'};
+var classs='';
+if (feature.properties.magnitude >=2){classs='circlewhite'};
+if (feature.properties.magnitude >=3){ classs='circleyellow'};
+if (feature.properties.magnitude >=4){ classs='circleorange'};
 
-if (feature.properties.magnitude >=5 ){ customicon='pinrossoe.png'};
-		return L.marker(latlng, {
-			icon:L.icon({
-				iconUrl: customicon,
-				shadowUrl: 'marker-shadow.png',
-				iconSize: [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
-				shadowSize:   [30*feature.properties.magnitude/3, 30*feature.properties.magnitude/3],
-				shadowAnchor: [10*feature.properties.magnitude/3, 18*feature.properties.magnitude/3]
-			})
-		});
+if (feature.properties.magnitude >=5 ){ classs='circlered'};
+		return L.marker(latlng, 
+			 { 
+		icon : L.divIcon({ 
+			className : classs,
+                      iconSize : [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
+html: '<div style="display: table; height:'+20*feature.properties.magnitude/3+'px; overflow: hidden; "><div align="center" style="display: table-cell; vertical-align: middle;"><div style="width:'+20*feature.properties.magnitude/3+'px;"><font color="white">'+feature.properties.magnitude+'</font></div></div></div>'}),
+                      title: '<div>'+feature.properties.magnitude+'</div>'});
+
+
+
 	},
 	firstLineTitles: true
 });
@@ -297,20 +417,23 @@ return true;
     },
 
 	pointToLayer: function (feature, latlng) {
-if (feature.properties.magnitude >=2){ customicon='pingiallo.png'};
-if (feature.properties.magnitude >=3){ customicon='pinarancio.png'};
-if (feature.properties.magnitude >=4){ customicon='pinarancioforte.png'};
+var classs='';
+if (feature.properties.magnitude >=2){classs='circlewhite'};
+if (feature.properties.magnitude >=3){ classs='circleyellow'};
+if (feature.properties.magnitude >=4){ classs='circleorange'};
 
-if (feature.properties.magnitude >=5 ){ customicon='pinrossoe.png'};
-		return L.marker(latlng, {
-			icon:L.icon({
-				iconUrl: customicon,
-				shadowUrl: 'marker-shadow.png',
-				iconSize: [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
-				shadowSize:   [30*feature.properties.magnitude/3, 30*feature.properties.magnitude/3],
-				shadowAnchor: [10*feature.properties.magnitude/3, 18*feature.properties.magnitude/3]
-			})
-		});
+if (feature.properties.magnitude >=5 ){ classs='circlered'};
+		return L.marker(latlng, 
+			 { 
+		icon : L.divIcon({ 
+			className : classs,
+                      iconSize : [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
+html: '<div style="display: table; height:'+20*feature.properties.magnitude/3+'px; overflow: hidden; "><div align="center" style="display: table-cell; vertical-align: middle;"><div style="width:'+20*feature.properties.magnitude/3+'px;"><font color="white">'+feature.properties.magnitude+'</font></div></div></div>'}),
+                      title: '<div>'+feature.properties.magnitude+'</div>'});
+
+        
+
+
 	},
 	firstLineTitles: true
 });
@@ -351,20 +474,22 @@ return true;
     },
 
 	pointToLayer: function (feature, latlng) {
-if (feature.properties.magnitude >=2){ customicon='pingiallo.png'};
-if (feature.properties.magnitude >=3){ customicon='pinarancio.png'};
-if (feature.properties.magnitude >=4){ customicon='pinarancioforte.png'};
+var classs='';
+if (feature.properties.magnitude >=2){classs='circlewhite'};
+if (feature.properties.magnitude >=3){ classs='circleyellow'};
+if (feature.properties.magnitude >=4){ classs='circleorange'};
 
-if (feature.properties.magnitude >=5 ){ customicon='pinrossoe.png'};
-		return L.marker(latlng, {
-			icon:L.icon({
-				iconUrl: customicon,
-				shadowUrl: 'marker-shadow.png',
-				iconSize: [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
-				shadowSize:   [30*feature.properties.magnitude/3, 30*feature.properties.magnitude/3],
-				shadowAnchor: [10*feature.properties.magnitude/3, 18*feature.properties.magnitude/3]
-			})
-		});
+if (feature.properties.magnitude >=5 ){ classs='circlered'};
+		return L.marker(latlng, 
+			 { 
+		icon : L.divIcon({ 
+			className : classs,
+                      iconSize : [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
+html: '<div style="display: table; height:'+20*feature.properties.magnitude/3+'px; overflow: hidden; "><div align="center" style="display: table-cell; vertical-align: middle;"><div style="width:'+20*feature.properties.magnitude/3+'px;"><font color="white">'+feature.properties.magnitude+'</font></div></div></div>'}),
+                      title: '<div>'+feature.properties.magnitude+'</div>'});
+
+
+
 	},
 	firstLineTitles: true
 });
