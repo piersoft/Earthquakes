@@ -176,7 +176,7 @@ $output2 = passthru("sed -e 's/$search2/$replace2/g' $fileok1 > $fileok2");
 
 <div id="infodiv" style="leaflet-popup-content-wrapper">
 <b>Earthquakes last 90 days until the last registrated</b>
-<b>. Magnitudo: </b>>=2 <img src="pingiallo.png" width="8" height="8">  >=3 <img src="pinarancio.png" width="8" height="8">  >=4 <img src="pinarancioforte.png" width="8" height="8">  >=5 <img src="pinrosso.png" width="8" height="8"> | by @Piersoft with data from <a href="http://openmap.rm.ingv.it/gmaps/rec/files/last90days_events.csv">INGV</a> | Map Data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors
+<b>. Magnitudo: </b>>=2 <img src="pingiallo.png" width="8" height="8">  >=3 <img src="pinarancio.png" width="8" height="8">  >=4 <img src="pinarancioforte.png" width="8" height="8">  >=5 <img src="pinrossoe.png" width="8" height="8"> | by @Piersoft with data from <a href="http://openmap.rm.ingv.it/gmaps/rec/files/last90days_events.csv">INGV</a> | Map Data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors
 </div>
 
 <div id="botonera">
@@ -252,9 +252,9 @@ if (feature.properties.magnitude >=5 ){ customicon='pinrossoe.png'};
 			icon:L.icon({
 				iconUrl: customicon,
 				shadowUrl: 'marker-shadow.png',
-				iconSize: [20,20],
-				shadowSize:   [30, 30],
-				shadowAnchor: [10, 18]
+				iconSize: [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
+				shadowSize:   [30*feature.properties.magnitude/3, 30*feature.properties.magnitude/3],
+				shadowAnchor: [10*feature.properties.magnitude/3, 18*feature.properties.magnitude/3]
 			})
 		});
 	},
@@ -306,9 +306,9 @@ if (feature.properties.magnitude >=5 ){ customicon='pinrossoe.png'};
 			icon:L.icon({
 				iconUrl: customicon,
 				shadowUrl: 'marker-shadow.png',
-				iconSize: [20,20],
-				shadowSize:   [30, 30],
-				shadowAnchor: [10, 18]
+				iconSize: [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
+				shadowSize:   [30*feature.properties.magnitude/3, 30*feature.properties.magnitude/3],
+				shadowAnchor: [10*feature.properties.magnitude/3, 18*feature.properties.magnitude/3]
 			})
 		});
 	},
@@ -360,9 +360,9 @@ if (feature.properties.magnitude >=5 ){ customicon='pinrossoe.png'};
 			icon:L.icon({
 				iconUrl: customicon,
 				shadowUrl: 'marker-shadow.png',
-				iconSize: [20,20],
-				shadowSize:   [30, 30],
-				shadowAnchor: [10, 18]
+				iconSize: [20*feature.properties.magnitude/3,20*feature.properties.magnitude/3],
+				shadowSize:   [30*feature.properties.magnitude/3, 30*feature.properties.magnitude/3],
+				shadowAnchor: [10*feature.properties.magnitude/3, 18*feature.properties.magnitude/3]
 			})
 		});
 	},
@@ -415,11 +415,13 @@ $.ajax ({
           cluster1 = new L.MarkerClusterGroup();
 		bankias2.addData(csv);
 		cluster1.addLayer(bankias2);
-		mapa.addLayer(cluster1);
-		mapa.fitBounds(cluster1.getBounds());
+		
 
 	},
    complete: function() {
+
+mapa.addLayer(cluster1);
+mapa.fitBounds(cluster1.getBounds());
 
 mapa.removeLayer(cluster);
 mapa.removeLayer(cluster2);
@@ -428,11 +430,12 @@ button="NO";
 $('#botonera').delay(100).fadeOut('slow');
       $('#cargando').delay(100).fadeOut('slow');
 
+
    }
 });
 
 
-map.addLayer(bankias2);
+
 
 }
 }
@@ -457,11 +460,13 @@ $.ajax ({
           cluster2 = new L.MarkerClusterGroup();
 		bankias3.addData(csv);
 		cluster2.addLayer(bankias3);
-		mapa.addLayer(cluster2);
-		mapa.fitBounds(cluster2.getBounds());
+		
 
 	},
    complete: function() {
+
+mapa.addLayer(cluster2);
+mapa.fitBounds(cluster2.getBounds());
 
 mapa.removeLayer(cluster);
 mapa.removeLayer(cluster1);
@@ -475,7 +480,7 @@ $('#botonera1').delay(100).fadeOut('slow');
 });
 
 
-map.addLayer(bankias3);
+
 
 }
 }
